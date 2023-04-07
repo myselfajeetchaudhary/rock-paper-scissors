@@ -1,16 +1,30 @@
-// Computer's Random Choice of Rock, Paper, Scissors
-function getComputerChoice() {
-    let gameText = ['Rock', 'Paper', 'Scissors'];
-    let randomNumber = Math.floor(Math.random() * gameText.length);
-    return gameText[randomNumber];
-}
-
 let playerScore = 0;
 let compScore = 0;
 
-// Playing 1 Game Rounds
+// Computer's Random Choice of Rock, Paper, Scissors
+const computerSelection = function() {
+    let gameText = ['Rock', 'Paper', 'Scissors'];
+    let randomSelection = Math.floor(Math.random() * gameText.length);
+    return gameText[randomSelection];
+}
+
+// Selecting buttons with class 'btn'
+const buttons = document.querySelectorAll('.btn');
+
+// Calling playRound() when button clicked
+buttons.forEach(button => {
+    button.addEventListener('click', playGame);
+});
+
+// Getting player choice and calling playRound function 
+function playGame(e) {
+    let playerSelection = e.target.textContent;
+    return playRound(playerSelection, computerSelection());
+}
+
+// Declaring a playRound function
+
 function playRound(playerSelection, computerSelection) {
-    
     switch(true) {
         // PLayer 'Rock' and Computer 'Paper'
         case (playerSelection === 'Rock' && computerSelection === 'Paper'):
@@ -45,24 +59,23 @@ function playRound(playerSelection, computerSelection) {
         // PLayer chooses same as Computer    
         case (playerSelection === computerSelection):
             return console.log(`Draw! Scores = Player-${playerScore} computer-${compScore}`);
-            break;  
+            break;      
     }
 }
 
 // Looping to play 5 Game Rounds
-for (let i = 0; i < 5; i++) {
-    let userChoice = prompt('Choose between (Rock, Paper, Scissors)');
-    let playerSelection = userChoice.charAt(0).toUpperCase() + userChoice.slice(1).toLocaleLowerCase();
-    let computerSelection = getComputerChoice();
+// for (let i = 0; i < 5; i++) {
+//     let userChoice = prompt('Choose between (Rock, Paper, Scissors)');
+//     let playerSelection = userChoice.charAt(0).toUpperCase() + userChoice.slice(1).toLocaleLowerCase();
 
-    console.log(playRound(playerSelection, computerSelection));
-}
+//     console.log(playRound(playerSelection, computerSelection()));
+// }
 
 // Declaring the Final Winner
-if(playerScore > compScore) {
-    console.log('You Won!')
-}else if(playerScore === compScore) {
-    console.log('It\'s a Draw!')
-}else {
-    console.log('You Lose!')
-}
+// if(playerScore > compScore) {
+//     console.log('You Won!')
+// }else if(playerScore === compScore) {
+//     console.log('It\'s a Draw!')
+// }else {
+//     console.log('You Lose!')
+// }
